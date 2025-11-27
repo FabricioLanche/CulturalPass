@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción a Evento</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #8B4513;
+            line-height: 1.4;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #FFF8DC;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #DAA520 0%, #CD853F 100%);
+            padding: 30px 25px;
+            text-align: center;
+            color: #8B4513;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        .success-badge {
+            background: #DAA520;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .greeting {
+            font-size: 24px;
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #DAA520;
+            padding-bottom: 15px;
+        }
+
+        .event-info {
+            background: linear-gradient(135deg, #F5DEB3 0%, #F4E4BC 100%);
+            border-left: 4px solid #CD853F;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .event-title {
+            font-size: 16px;
+            color: #8B4513;
+            margin-bottom: 8px;
+        }
+
+        .event-name {
+            font-size: 20px;
+            color: #8B4513;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .event-date {
+            background: #DAA520;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* DISEÑO DE BOLETO */
+        .ticket {
+            background: white;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px dashed #CD853F;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+        }
+
+        .ticket::before,
+        .ticket::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FFF8DC;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .ticket::before {
+            left: -10px;
+        }
+
+        .ticket::after {
+            right: -10px;
+        }
+
+        .ticket-header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .ticket-content {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .ticket-instruction {
+            color: #8B4513;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .qr-container {
+            background: #F9F9F9;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px solid #E0E0E0;
+            margin: 10px 0;
+        }
+
+        .qr-container img {
+            display: block;
+            max-width: 180px;
+            height: auto;
+        }
+
+        .ticket-footer {
+            background: #F5F5F5;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: #FFF8DC;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .greeting {
+                font-size: 20px;
+            }
+
+            .cultural-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header" style="text-align: center;">
+        <img src="https://jtnipvmzvjcqgokrmihe.supabase.co/storage/v1/object/public/event-images/icono.png" alt="Centro Cultural Amador Ballumbrosio" width="100" height="100" style="display:block; margin:0 auto;" />
+        <h1 style="font-size: 20px; font-family: Arial, sans-serif; line-height: 1.2; margin-top: 10px;">
+            Centro Cultural<br><a>Amador Ballumbrosio</a>
+        </h1>
+    </div>
+
+    <div class="content">
+        <div class="success-badge">✓ Inscripción Confirmada</div>
+
+        <h2 class="greeting" th:text="'¡Hola ' + ${name} + '!'" />
+
+        <div class="event-info">
+            <div class="event-title">Te has inscrito exitosamente al evento:</div>
+            <div class="event-name" th:text="${eventTitle}" />
+            <div class="event-date">
+                📅 <span th:text="${eventDate}" />
+            </div>
+        </div>
+
+        <!-- BOLETO CON QR -->
+        <div class="ticket">
+            <div class="ticket-header">
+                🎟️ BOLETO DE ENTRADA
+            </div>
+
+            <div class="ticket-content">
+                <div class="ticket-instruction">
+                    Presenta este código QR al personal<br>
+                    en la recepción del evento
+                </div>
+
+                <div class="qr-container">
+                    <img src="cid:qrCode" alt="Código QR de Entrada" />
+                </div>
+            </div>
+
+            <div class="ticket-footer">
+                Válido únicamente para el evento registrado • Conserva este boleto
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            ¡Te esperamos para vivir una experiencia cultural única! 🌟<br>
+            <strong>Importante:</strong> Llega 15 minutos antes del evento
+        </p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción a Evento</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #8B4513;
+            line-height: 1.4;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #FFF8DC;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #DAA520 0%, #CD853F 100%);
+            padding: 30px 25px;
+            text-align: center;
+            color: #8B4513;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        .success-badge {
+            background: #DAA520;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .greeting {
+            font-size: 24px;
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #DAA520;
+            padding-bottom: 15px;
+        }
+
+        .event-info {
+            background: linear-gradient(135deg, #F5DEB3 0%, #F4E4BC 100%);
+            border-left: 4px solid #CD853F;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .event-title {
+            font-size: 16px;
+            color: #8B4513;
+            margin-bottom: 8px;
+        }
+
+        .event-name {
+            font-size: 20px;
+            color: #8B4513;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .event-date {
+            background: #DAA520;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .simple-ticket {
+            background: white;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #CD853F;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+        }
+
+        .ticket-header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .ticket-content {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .confirmation-message {
+            color: #8B4513;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .instruction-box {
+            background: #F0F8FF;
+            border: 2px dashed #4682B4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .instruction-text {
+            color: #2F4F4F;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .contact-info {
+            background: #FFF8DC;
+            border: 1px solid #DAA520;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .contact-info h4 {
+            color: #8B4513;
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+
+        .contact-info p {
+            color: #666;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: #FFF8DC;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .greeting {
+                font-size: 20px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header" style="text-align: center;">
+        <img src="https://jtnipvmzvjcqgokrmihe.supabase.co/storage/v1/object/public/event-images/icono.png" alt="Centro Cultural Amador Ballumbrosio" width="100" height="100" style="display:block; margin:0 auto;" />
+        <h1 style="font-size: 20px; font-family: Arial, sans-serif; line-height: 1.2; margin-top: 10px;">
+            Centro Cultural<br><a>Amador Ballumbrosio</a>
+        </h1>
+    </div>
+
+    <div class="content">
+        <div class="success-badge">✓ Inscripción Confirmada</div>
+
+        <h2 class="greeting" th:text="'¡Hola ' + ${name} + '!'" />
+
+        <div class="event-info">
+            <div class="event-title">Te has inscrito exitosamente al evento:</div>
+            <div class="event-name" th:text="${eventTitle}" />
+            <div class="event-date">
+                📅 <span th:text="${eventDate}" />
+            </div>
+        </div>
+
+        <div class="simple-ticket">
+            <div class="ticket-header">
+                🎟️ CONFIRMACIÓN DE INSCRIPCIÓN
+            </div>
+
+            <div class="ticket-content">
+                <div class="confirmation-message">
+                    ¡Tu inscripción ha sido registrada exitosamente!
+                </div>
+
+                <div class="instruction-box">
+                    <p class="instruction-text">
+                        📋 <strong>Para ingresar al evento, solo necesitas:</strong><br>
+                        • Presentarte en la recepción con tu nombre<br>
+                        • Mostrar este correo de confirmación<br>
+                        • Tu documento de identidad
+                    </p>
+                </div>
+
+                <div class="contact-info">
+                    <h4>📞 ¿Tienes alguna consulta?</h4>
+                    <p>Contáctanos antes del evento si necesitas ayuda</p>
+                    <p><strong>Email:</strong> info@centroculturalballumbrosio.pe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            ¡Te esperamos para vivir una experiencia cultural única! 🌟<br>
+            <strong>Importante:</strong> Llega 15 minutos antes del evento
+        </p>
+    </div>
+</div>
+</body>
+</html>
